@@ -17,19 +17,27 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    // Check user with the same email exists already.
-    let user = await User.findOne({ email: req.body.email });
-    if (user) {
-      return res
-        .status(400)
-        .json({ error: "Sorry a user with this email already exists" });
+
+    try {
+      // Check if a user with the same email already exists.
+      let user = await User.findOne({ email: req.body.email });
+      if (user) {
+        return res
+          .status(400)
+          .json({ error: "Sorry a user with this email already exists" });
+      }
+      // Create a new user
+      user = await User.create({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+      });
+      res.json({ user });
+    } catch (error) {
+      // Catch errors.
+      console.error(error.message);
+      res.status(500).send("Some error occurred");
     }
-    user = await User.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-    });
-    res.json({ user });
   }
 );
 

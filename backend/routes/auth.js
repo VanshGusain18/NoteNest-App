@@ -4,6 +4,7 @@ const { body, validationResult } = require("express-validator");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { post } = require("./auth");
 const JWT_SECRET = "vanshish3re";
 
 // Create a User using POST "/api/auth/createuser". No login required
@@ -49,7 +50,52 @@ router.post(
     } catch (error) {
       // Catch errors.
       console.error(error.message);
-      res.status(500).send("Some error occurred");
+      res.status(500).send("Internal Server Error");
+    }
+  }
+);
+
+// Create a User using POST "/api/auth/login". No login required
+router.post(
+  "/login",
+  [
+    body("email", "enter a valid email").isEmail(),
+    body("password", "password can't be black").exists(),
+  ],
+  async (req, res) => {
+    const error = validationResult(req);
+    if (!error.isEmpty) {
+      return res.status(400).json({ error: error.array() });
+    }
+
+    const { email, password } = req.body;
+
+    try {
+      let user = await User.findOne({ email });
+      if (!user) {
+        return res
+          .status(400)
+          .json({ error: "please try to login with correct credentials" });
+      }
+
+      let compPassword = await bcrypt.compare(password, user.password);
+      if (!compPassword) {
+        return res
+          .status(400)
+          .json({ error: "please try to login with correct credentials" });
+      }
+
+      const data = {
+        user: {
+          id: user.id,
+        },
+      };
+      const authToken = jwt.sign(data, JWT_SECRET);
+
+      res.json({ authToken });
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).json("Internal Server Error");
     }
   }
 );

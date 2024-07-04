@@ -9,20 +9,20 @@ router.post(
   "/createnote",
   fetchuser,
   [
-    body("tittle", "minimum length of tittle is 3").isLength({ min: 3 }),
+    body("title", "minimum length of title is 3").isLength({ min: 3 }),
     body("description", "minimum length of description is 5").isLength({
       min: 5,
     }),
   ],
   async (req, res) => {
     try {
-      const { tittle, description, tag } = req.body;
+      const { title, description, tag } = req.body;
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
       }
       const note = Note({
-        tittle,
+        title,
         description,
         tag,
         user: req.user.id,
@@ -36,5 +36,16 @@ router.post(
     }
   }
 );
+
+//ROUTE2: get all notes using GET "/api/notes/getnotes". No login required
+router.get("/getnotes", fetchuser, async (req, res) => {
+  try {
+    const notes = await Note.find({ user: req.user.id });
+    res.json(notes);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Internal Server Error");
+  }
+});
 
 module.exports = router;

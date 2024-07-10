@@ -1,12 +1,12 @@
 import "./App.css";
+import Navbar from "./Components/Navbar";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>this is notenest</h1>
-      </header>
-    </div>
+    <>
+      <Navbar />
+      <h1>this is notenest</h1>
+    </>
   );
 }
 

@@ -99,7 +99,16 @@ const NoteState = (props) => {
     setNotes(newNote);
   };
   //Edit a note.
-  const editnote = () => {};
+  const editnote = (title, description, tag, _id) => {
+    for (let index = 0; index < notes.length.length; index++) {
+      const element = notes[index];
+      if (element._id === _id) {
+        element.title = title;
+        element.description = description;
+        element.tag = tag;
+      }
+    }
+  };
   return (
     <NoteContext.Provider value={{ notes, addnote, deletenote, editnote }}>
       {props.children}

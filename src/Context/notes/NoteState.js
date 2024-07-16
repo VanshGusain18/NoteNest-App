@@ -35,6 +35,7 @@ const NoteState = (props) => {
       body: JSON.stringify({ title, description, tag }),
     });
     const json = await response.json();
+    setNotes(json);
 
     const note = {
       _id: "6686b61d23aae175f821541490a",
@@ -60,6 +61,7 @@ const NoteState = (props) => {
       body: JSON.stringify({ _id }),
     });
     const json = await response.json();
+    setNotes(json);
 
     console.log("delteing note" + _id);
     const newNote = notes.filter((note) => note._id !== _id);
@@ -68,7 +70,7 @@ const NoteState = (props) => {
 
   //Edit a note.
   const editnote = async (title, description, tag, _id) => {
-    const response = await fetch(`${url}//api/notes/updatenotes/${_id}`, {
+    const response = await fetch(`${url}/api/notes/updatenotes/${_id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -78,6 +80,7 @@ const NoteState = (props) => {
       body: JSON.stringify({ title, description, tag }),
     });
     const json = await response.json();
+    setNotes(json);
 
     for (let index = 0; index < notes.length; index++) {
       const element = notes[index];

@@ -24,7 +24,7 @@ const NoteState = (props) => {
   };
 
   //Add a note.
-  const addnote = async ({ title, description, tag }) => {
+  const addnote = async (title, description, tag) => {
     const response = await fetch(`${url}/api/notes/createnote`, {
       method: "POST",
       headers: {
@@ -35,18 +35,9 @@ const NoteState = (props) => {
       body: JSON.stringify({ title, description, tag }),
     });
     const json = await response.json();
-    setNotes(json);
+    console.log(json);
 
-    const note = {
-      _id: "6686b61d23aae175f821541490a",
-      user: "6686b135a9cfdf08a513a959",
-      title: title,
-      description: description,
-      tags: tag,
-      date: "2024-07-04T14:47:57.154Z",
-      __v: 0,
-    };
-    setNotes(notes.concat(note));
+    setNotes(notes.concat(json));
   };
 
   //Delete a note.

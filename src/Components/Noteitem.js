@@ -19,7 +19,7 @@ const Noteitem = (props) => {
             <i
               className="fa-solid fa-pen-to-square mx-2"
               onClick={() => {
-                updateNote();
+                updateNote(note);
               }}
             ></i>
             <i className="fa-solid fa-trash mx-2 " onClick={handleclick}></i>

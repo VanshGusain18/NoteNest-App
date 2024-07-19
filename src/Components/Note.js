@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import NoteContext from "../Context/notes/NoteContext";
 import Noteitem from "./Noteitem";
 import Addnote from "./Addnote";
@@ -12,10 +12,29 @@ const Note = () => {
     // eslint-disable-next-line
   }, []);
 
-  const ref = useRef("");
+  const ref = useRef(null);
 
-  const updateNote = (note) => {
+  const [note, setNote] = useState({
+    etitle: "",
+    edescription: "",
+    etag: "default",
+  });
+
+  const updateNote = (currentNote) => {
     ref.current.click();
+    setNote({
+      etitle: currentNote.title,
+      edescription: currentNote.description,
+      etag: currentNote.tag,
+    });
+  };
+
+  const handleclick = (e) => {
+    e.preventDefault();
+  };
+
+  const handlechange = (e) => {
+    setNote({ ...note, [e.target.name]: e.target.value });
   };
 
   return (
@@ -51,7 +70,50 @@ const Note = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">...</div>
+            <div class="modal-body">
+              <form>
+                <div className="mb-3 my-3">
+                  <label htmlFor="title" className="form-label">
+                    Title
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="etitle"
+                    name="etitle"
+                    value={note.etitle}
+                    aria-describedby="emailHelp"
+                    onChange={handlechange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="description" className="form-label">
+                    Description
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="edescription"
+                    name="edescription"
+                    value={note.edescription}
+                    onChange={handlechange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="tag" className="form-label">
+                    Tag
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="etag"
+                    name="etag"
+                    value={note.etag}
+                    onChange={handlechange}
+                  />
+                </div>
+              </form>
+            </div>
             <div class="modal-footer">
               <button
                 type="button"

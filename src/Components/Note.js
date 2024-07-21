@@ -28,14 +28,14 @@ const Note = () => {
       id: currentNote._id,
       etitle: currentNote.title,
       edescription: currentNote.description,
-      etag: currentNote.tag,
+      etag: currentNote.tag || "default",
     });
   };
 
   const handleclick = (e) => {
     refClose.current.click();
     e.preventDefault();
-    console.log(note.etitle, note.edescription, note.etag);
+    editnote(note.etitle, note.edescription, note.etag, note.id);
   };
 
   const handlechange = (e) => {

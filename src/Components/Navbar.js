@@ -47,6 +47,12 @@ const Navbar = () => {
             </ul>
           </div>
         </div>
+        <a class="btn btn-primary" href="#" role="button">
+          log in
+        </a>
+        <a class="btn btn-primary" href="#" role="button">
+          sign up
+        </a>
       </nav>
     </div>
   );

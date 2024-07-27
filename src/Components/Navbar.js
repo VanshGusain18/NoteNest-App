@@ -45,14 +45,14 @@ const Navbar = () => {
                 </Link>
               </li>
             </ul>
+            <Link class="btn btn-primary mx-1" to="/login" role="button">
+              Login
+            </Link>
+            <Link class="btn btn-primary mx-1" to="signup" role="button">
+              Signup
+            </Link>
           </div>
         </div>
-        <a class="btn btn-primary" href="#" role="button">
-          log in
-        </a>
-        <a class="btn btn-primary" href="#" role="button">
-          sign up
-        </a>
       </nav>
     </div>
   );

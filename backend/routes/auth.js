@@ -63,6 +63,7 @@ router.post(
     body("password", "password can't be black").exists(),
   ],
   async (req, res) => {
+    let success = false;
     const error = validationResult(req);
     if (!error.isEmpty) {
       return res.status(400).json({ error: error.array() });
@@ -73,6 +74,7 @@ router.post(
     try {
       let user = await User.findOne({ email });
       if (!user) {
+        success = false;
         return res
           .status(400)
           .json({ error: "please try to login with correct credentials" });
@@ -80,6 +82,7 @@ router.post(
 
       let compPassword = await bcrypt.compare(password, user.password);
       if (!compPassword) {
+        success = false;
         return res
           .status(400)
           .json({ error: "please try to login with correct credentials" });
@@ -91,8 +94,8 @@ router.post(
         },
       };
       const authToken = jwt.sign(data, JWT_SECRET);
-
-      res.json({ authToken });
+      success = true;
+      res.json({ success, authToken });
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Internal Server Error");

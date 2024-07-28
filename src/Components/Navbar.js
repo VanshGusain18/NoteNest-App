@@ -45,10 +45,10 @@ const Navbar = () => {
                 </Link>
               </li>
             </ul>
-            <Link class="btn btn-primary mx-1" to="/login" role="button">
+            <Link className="btn btn-primary mx-1" to="/login" role="button">
               Login
             </Link>
-            <Link class="btn btn-primary mx-1" to="signup" role="button">
+            <Link className="btn btn-primary mx-1" to="signup" role="button">
               Signup
             </Link>
           </div>

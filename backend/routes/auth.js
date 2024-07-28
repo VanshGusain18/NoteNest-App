@@ -16,6 +16,7 @@ router.post(
     body("password", "minimum length of password is 5").isLength({ min: 5 }),
   ],
   async (req, res) => {
+    let success = false;
     // If there are errors, return errors and bad request.
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -26,6 +27,8 @@ router.post(
       // Check if a user with the same email already exists.
       let user = await User.findOne({ email: req.body.email });
       if (user) {
+        let success = false;
+
         return res
           .status(400)
           .json({ error: "Sorry a user with this email already exists" });
@@ -44,9 +47,11 @@ router.post(
           id: user.id,
         },
       };
+      success = true;
+
       const authToken = jwt.sign(data, JWT_SECRET);
 
-      res.json({ authToken });
+      res.json({ success, authToken });
     } catch (error) {
       // Catch errors.
       console.error(error.message);

@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../Context/notes/AuthContext";
 
 const Login = () => {
+  const contex = useContext(AuthContext);
+  const { setAuthtoken } = contex;
+
   const url = "http://localhost:5000";
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
@@ -20,11 +24,9 @@ const Login = () => {
       }),
     });
     const json = await response.json();
-    // console.log(json);
     if (json.success) {
       localStorage.setItem("token", json.authtoken);
-      const { authtoken } = json;
-      console.log(authtoken);
+      setAuthtoken(json);
       navigate("/");
     } else {
       alert("Invalid Credentials");

@@ -2,9 +2,13 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import NoteContext from "../Context/notes/NoteContext";
 import Noteitem from "./Noteitem";
 import Addnote from "./Addnote";
+import AuthContext from "../Context/notes/AuthContext";
 
 const Note = () => {
   const context = useContext(NoteContext);
+  const contextAu = useContext(AuthContext);
+
+  const authtoken = contextAu;
   const { notes, getnote, editnote } = context;
 
   useEffect(() => {
@@ -147,11 +151,13 @@ const Note = () => {
         <div className="container mx-2">
           {notes.length === 0 && "No notes to show here..."}
         </div>
-        {notes.map((note) => {
-          return (
-            <Noteitem key={note._id} note={note} updateNote={updateNote} />
-          );
-        })}
+        {authtoken !== null && (
+          <>
+            {notes.map((note) => (
+              <Noteitem key={note._id} note={note} updateNote={updateNote} />
+            ))}
+          </>
+        )}
       </div>
     </>
   );

@@ -12,6 +12,7 @@ import { useState } from "react";
 
 function App() {
   const [alert, setAlert] = useState(null);
+  const [mode, setMode] = useState(null);
 
   const showAlert = (messenge, type) => {
     setAlert({
@@ -25,12 +26,15 @@ function App() {
 
   const handleadd = () => {
     showAlert("note has been added", "success");
+    setMode("success");
   };
   const handledel = () => {
     showAlert("note has been deleted", "success");
+    setMode("danger");
   };
   const handleedit = () => {
     showAlert("note has been edited", "success");
+    setMode("primary");
   };
 
   return (
@@ -39,7 +43,7 @@ function App() {
         <NoteState>
           <Router>
             <Navbar />
-            <Alert alert={alert} />
+            <Alert alert={alert} mode={mode} />
             <Routes>
               <Route
                 path="/"

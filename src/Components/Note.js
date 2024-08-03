@@ -4,7 +4,7 @@ import Noteitem from "./Noteitem";
 import Addnote from "./Addnote";
 import AuthContext from "../Context/notes/AuthContext";
 
-const Note = () => {
+const Note = (props) => {
   const context = useContext(NoteContext);
   const contextAu = useContext(AuthContext);
 
@@ -37,6 +37,7 @@ const Note = () => {
   };
 
   const handleclick = (e) => {
+    props.handleedit();
     refClose.current.click();
     e.preventDefault();
     editnote(note.etitle, note.edescription, note.etag, note.id);
@@ -48,7 +49,7 @@ const Note = () => {
 
   return (
     <>
-      <Addnote />
+      <Addnote handleadd={props.handleadd} />
       <button
         type="button"
         className="btn btn-primary d-none"
@@ -154,7 +155,12 @@ const Note = () => {
         {authtoken !== null && (
           <>
             {notes.map((note) => (
-              <Noteitem key={note._id} note={note} updateNote={updateNote} />
+              <Noteitem
+                key={note._id}
+                note={note}
+                updateNote={updateNote}
+                handledel={props.handledel}
+              />
             ))}
           </>
         )}

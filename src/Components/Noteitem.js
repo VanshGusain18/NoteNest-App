@@ -8,6 +8,7 @@ const Noteitem = (props) => {
 
   const handleclick = () => {
     deletenote(note._id);
+    props.handledel();
   };
 
   return (

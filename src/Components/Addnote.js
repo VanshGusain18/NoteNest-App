@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import NoteContext from "../Context/notes/NoteContext";
 
-const Addnote = () => {
+const Addnote = (props) => {
   const contex = useContext(NoteContext);
   const { addnote } = contex;
 
@@ -19,6 +19,7 @@ const Addnote = () => {
       description: "",
       tag: "",
     });
+    props.handleadd();
   };
 
   const handlechange = (e) => {

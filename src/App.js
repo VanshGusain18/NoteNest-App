@@ -8,17 +8,49 @@ import Alert from "./Components/Alert";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
 import AuthState from "./Context/notes/AuthState";
+import { useState } from "react";
 
 function App() {
+  const [alert, setAlert] = useState(null);
+
+  const showAlert = (messenge, type) => {
+    setAlert({
+      msg: messenge,
+      type: type,
+    });
+    setTimeout(() => {
+      setAlert(null);
+    }, 2000);
+  };
+
+  const handleadd = () => {
+    showAlert("note has been added", "success");
+  };
+  const handledel = () => {
+    showAlert("note has been deleted", "success");
+  };
+  const handleedit = () => {
+    showAlert("note has been edited", "success");
+  };
+
   return (
     <>
       <AuthState>
         <NoteState>
           <Router>
             <Navbar />
-            <Alert msg="this will be done later" />
+            <Alert alert={alert} />
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route
+                path="/"
+                element={
+                  <Home
+                    handleadd={handleadd}
+                    handledel={handledel}
+                    handleedit={handleedit}
+                  />
+                }
+              />
               <Route exact path="/about" element={<About />} />
               <Route exact path="/login" element={<Login />} />
               <Route exact path="/signup" element={<Signup />} />

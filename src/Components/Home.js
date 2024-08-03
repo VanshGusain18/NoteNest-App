@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Note from "./Note";
 import AuthContext from "../Context/notes/AuthContext";
-const Home = () => {
+const Home = (props) => {
   const contex = useContext(AuthContext);
   const { authtoken } = contex;
 
@@ -12,7 +12,12 @@ const Home = () => {
           Login or Signup to use NoteNest
         </p>
       ) : (
-        <Note />
+        <Note
+          alert={props.alert}
+          handleadd={props.handleadd}
+          handledel={props.handledel}
+          handleedit={props.handleedit}
+        />
       )}
     </div>
   );

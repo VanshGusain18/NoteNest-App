@@ -14,9 +14,8 @@ const Home = (props) => {
       ) : (
         <Note
           alert={props.alert}
-          handleadd={props.handleadd}
-          handledel={props.handledel}
-          handleedit={props.handleedit}
+          showAlert={props.showAlert}
+          setMode={props.setMode}
         />
       )}
     </div>

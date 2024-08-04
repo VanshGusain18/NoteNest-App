@@ -6,9 +6,14 @@ const Noteitem = (props) => {
   const { deletenote } = context;
   const { note, updateNote } = props;
 
+  const handledel = () => {
+    props.showAlert("note has been deleted", "success");
+    props.setMode("danger");
+  };
+
   const handleclick = () => {
     deletenote(note._id);
-    props.handledel();
+    handledel();
   };
 
   return (

@@ -11,6 +11,11 @@ const Note = (props) => {
   const authtoken = contextAu;
   const { notes, getnote, editnote } = context;
 
+  const handleedit = () => {
+    props.showAlert("note has been edited", "success");
+    props.setMode("primary");
+  };
+
   useEffect(() => {
     getnote();
     // eslint-disable-next-line
@@ -37,7 +42,7 @@ const Note = (props) => {
   };
 
   const handleclick = (e) => {
-    props.handleedit();
+    handleedit();
     refClose.current.click();
     e.preventDefault();
     editnote(note.etitle, note.edescription, note.etag, note.id);
@@ -49,7 +54,7 @@ const Note = (props) => {
 
   return (
     <>
-      <Addnote handleadd={props.handleadd} />
+      <Addnote showAlert={props.showAlert} setMode={props.setMode} />
       <button
         type="button"
         className="btn btn-primary d-none"
@@ -159,7 +164,8 @@ const Note = (props) => {
                 key={note._id}
                 note={note}
                 updateNote={updateNote}
-                handledel={props.handledel}
+                showAlert={props.showAlert}
+                setMode={props.setMode}
               />
             ))}
           </>

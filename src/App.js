@@ -24,19 +24,6 @@ function App() {
     }, 2000);
   };
 
-  const handleadd = () => {
-    showAlert("note has been added", "success");
-    setMode("success");
-  };
-  const handledel = () => {
-    showAlert("note has been deleted", "success");
-    setMode("danger");
-  };
-  const handleedit = () => {
-    showAlert("note has been edited", "success");
-    setMode("primary");
-  };
-
   return (
     <>
       <AuthState>
@@ -47,13 +34,7 @@ function App() {
             <Routes>
               <Route
                 path="/"
-                element={
-                  <Home
-                    handleadd={handleadd}
-                    handledel={handledel}
-                    handleedit={handleedit}
-                  />
-                }
+                element={<Home showAlert={showAlert} setMode={setMode} />}
               />
               <Route exact path="/about" element={<About />} />
               <Route exact path="/login" element={<Login />} />

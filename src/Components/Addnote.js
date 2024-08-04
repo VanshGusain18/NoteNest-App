@@ -11,6 +11,11 @@ const Addnote = (props) => {
     tag: "",
   });
 
+  const handleadd = () => {
+    props.showAlert("note has been added", "success");
+    props.setMode("success");
+  };
+
   const handleclick = (e) => {
     e.preventDefault();
     addnote(note.title, note.description, note.tag);
@@ -19,7 +24,7 @@ const Addnote = (props) => {
       description: "",
       tag: "",
     });
-    props.handleadd();
+    handleadd();
   };
 
   const handlechange = (e) => {

@@ -28,7 +28,7 @@ const Note = (props) => {
     id: "",
     etitle: "",
     edescription: "",
-    etag: "default",
+    etag: "Genral",
   });
 
   const updateNote = (currentNote) => {
@@ -37,7 +37,7 @@ const Note = (props) => {
       id: currentNote._id,
       etitle: currentNote.title,
       edescription: currentNote.description,
-      etag: currentNote.tag || "default",
+      etag: currentNote.tag || "Genral",
     });
   };
 

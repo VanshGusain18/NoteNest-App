@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-const Signup = () => {
+import AuthContext from "../Context/notes/AuthContext";
+const Signup = (props) => {
+  const contex = useContext(AuthContext);
+  const { setAuthtoken } = contex;
+
   const url = "http://localhost:5000";
   const [credentials, setCredentials] = useState({
     name: "",
@@ -28,9 +32,10 @@ const Signup = () => {
     console.log(json);
     if (json.success) {
       localStorage.setItem("token", json.authtoken);
+      setAuthtoken(json.authToken);
+      props.showAlert("your account have been created", "success");
+      props.setMode("success");
       navigate("/");
-    } else {
-      alert("Invalid Credentials");
     }
   };
 
@@ -102,7 +107,7 @@ const Signup = () => {
           }
           onClick={handleclick}
         >
-          Submit
+          Signup
         </button>
       </form>
     </div>

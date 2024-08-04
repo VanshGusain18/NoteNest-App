@@ -1,15 +1,18 @@
 import React from "react";
 
-const Alert = (props) => {
+export default function Alert(props) {
+  const captalize = (word) => {
+    const lower = word.toLowerCase();
+    return lower.charAt(0).toUpperCase() + word.slice(1);
+  };
+
   return (
-    <div>
+    <div style={{ height: "50px" }}>
       {props.alert && (
         <div className={`alert alert-${props.mode}`} role="alert">
-          <b>{props.alert.type}:</b> {props.alert.msg}
+          <b>{captalize(props.alert.type)}:</b> {props.alert.msg}
         </div>
       )}
     </div>
   );
-};
-
-export default Alert;
+}

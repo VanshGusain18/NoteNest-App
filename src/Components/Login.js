@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../Context/notes/AuthContext";
 
-const Login = () => {
+const Login = (props) => {
   const contex = useContext(AuthContext);
   const { setAuthtoken } = contex;
 
@@ -26,11 +26,13 @@ const Login = () => {
     const json = await response.json();
     if (json.success) {
       localStorage.setItem("token", json.authtoken);
-      console.log(json.authToken);
       setAuthtoken(json.authToken);
+      props.showAlert("you have been logged in", "success");
+      props.setMode("success");
       navigate("/");
     } else {
-      alert("Invalid Credentials");
+      props.showAlert("invalid credentials", "error");
+      props.setMode("danger");
     }
   };
 
@@ -69,7 +71,7 @@ const Login = () => {
           />
         </div>
         <button type="submit" className="btn btn-primary" onClick={handleclick}>
-          Submit
+          Login
         </button>
       </form>
     </div>

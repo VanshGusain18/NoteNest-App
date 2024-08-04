@@ -7,16 +7,16 @@ import NoteState from "./Context/notes/NoteState";
 import Alert from "./Components/Alert";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
-import AuthState from "./Context/notes/AuthState";
+import AuthState from "./Context/auth/AuthState";
 import { useState } from "react";
 
 function App() {
   const [alert, setAlert] = useState(null);
   const [mode, setMode] = useState(null);
 
-  const showAlert = (messenge, type) => {
+  const showAlert = (message, type) => {
     setAlert({
-      msg: messenge,
+      msg: message,
       type: type,
     });
     setTimeout(() => {

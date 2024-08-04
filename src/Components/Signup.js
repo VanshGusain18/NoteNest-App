@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../Context/notes/AuthContext";
+import AuthContext from "../Context/auth/AuthContext";
 const Signup = (props) => {
   const contex = useContext(AuthContext);
   const { setAuthtoken } = contex;

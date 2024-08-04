@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import NoteContext from "./NoteContext";
-import AuthContext from "./AuthContext";
+import AuthContext from "../auth/AuthContext";
 
 const NoteState = (props) => {
   const context = useContext(AuthContext);

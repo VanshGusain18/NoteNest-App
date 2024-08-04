@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import NoteContext from "../Context/notes/NoteContext";
 import Noteitem from "./Noteitem";
 import Addnote from "./Addnote";
-import AuthContext from "../Context/notes/AuthContext";
+import AuthContext from "../Context/auth/AuthContext";
 
 const Note = (props) => {
   const context = useContext(NoteContext);

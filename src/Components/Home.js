@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 import Note from "./Note";
-import AuthContext from "../Context/notes/AuthContext";
+import AuthContext from "../Context/auth/AuthContext";
+
 const Home = (props) => {
-  const contex = useContext(AuthContext);
-  const { authtoken } = contex;
+  const context = useContext(AuthContext);
+  const { authtoken } = context;
 
   return (
     <div className="container my-2">
       {authtoken === null ? (
-        <p class="d-flex justify-content-center">
+        <p className="d-flex justify-content-center">
           Login or Signup to use NoteNest
         </p>
       ) : (

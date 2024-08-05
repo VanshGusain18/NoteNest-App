@@ -45,6 +45,7 @@ const Signup = (props) => {
 
   return (
     <div className="container">
+      <h3>Please Create an Account in NoteNest to continue</h3>
       <form>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">

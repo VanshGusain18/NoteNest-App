@@ -42,6 +42,7 @@ const Login = (props) => {
 
   return (
     <div className="container">
+      <h3>Please Login in NoteNest to continue</h3>
       <form>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">

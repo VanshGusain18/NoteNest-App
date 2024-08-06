@@ -44,7 +44,7 @@ const Login = (props) => {
     <div className="container">
       <h3>Please Login in NoteNest to continue</h3>
       <form>
-        <div className="mb-3">
+        <div className="my-3">
           <label htmlFor="email" className="form-label">
             Email address
           </label>
@@ -62,14 +62,17 @@ const Login = (props) => {
           <label htmlFor="password" className="form-label">
             Password
           </label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            name="password"
-            value={credentials.password}
-            onChange={handlechange}
-          />
+          <p>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              name="password"
+              value={credentials.password}
+              onChange={handlechange}
+            />
+            <i class="bi bi-eye-slash" id="togglePassword"></i>
+          </p>
         </div>
         <button type="submit" className="btn btn-primary" onClick={handleclick}>
           Login

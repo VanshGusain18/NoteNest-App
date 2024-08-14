@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
+import AuthContext from "../Context/auth/AuthContext";
 
 const Navbar = () => {
   let location = useLocation();
+  const contex = useContext(AuthContext);
+  const { authtoken, setAuthtoken } = contex;
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -45,12 +49,27 @@ const Navbar = () => {
                 </Link>
               </li>
             </ul>
-            <Link className="btn btn-primary mx-1" to="/login" role="button">
-              Login
-            </Link>
-            <Link className="btn btn-primary mx-1" to="signup" role="button">
-              Signup
-            </Link>
+            {!authtoken && (
+              <Link className="btn btn-primary mx-1" to="/login" role="button">
+                Login
+              </Link>
+            )}
+            {!authtoken && (
+              <Link className="btn btn-primary mx-1" to="/signup" role="button">
+                Signup
+              </Link>
+            )}
+            {authtoken && (
+              <button
+                type="button"
+                class="btn btn-primary mx-1"
+                onClick={() => {
+                  setAuthtoken(null);
+                }}
+              >
+                Logout
+              </button>
+            )}
           </div>
         </div>
       </nav>

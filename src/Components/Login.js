@@ -62,7 +62,7 @@ const Login = (props) => {
           <label htmlFor="password" className="form-label">
             Password
           </label>
-          <p>
+          <p style={{ position: "relative" }}>
             <input
               type="password"
               className="form-control"
@@ -71,7 +71,11 @@ const Login = (props) => {
               value={credentials.password}
               onChange={handlechange}
             />
-            <i class="bi bi-eye-slash" id="togglePassword"></i>
+            <i
+              style={{ position: "absolute", top: "10%", right: "1%" }}
+              class="bi bi-eye-slash"
+              id="togglePassword"
+            ></i>
           </p>
         </div>
         <button type="submit" className="btn btn-primary" onClick={handleclick}>

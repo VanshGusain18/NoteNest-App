@@ -40,6 +40,16 @@ const Login = (props) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
+  const [pass, setPass] = useState("password");
+
+  const handlePass = () => {
+    if (pass === "password") {
+      setPass("text");
+    } else {
+      setPass("password");
+    }
+  };
+
   return (
     <div className="container">
       <h3>Please Login in NoteNest to continue</h3>
@@ -64,18 +74,28 @@ const Login = (props) => {
           </label>
           <p style={{ position: "relative" }}>
             <input
-              type="password"
+              type={pass}
               className="form-control"
               id="password"
               name="password"
               value={credentials.password}
               onChange={handlechange}
             />
-            <i
-              style={{ position: "absolute", top: "10%", right: "1%" }}
-              class="bi bi-eye-slash"
-              id="togglePassword"
-            ></i>
+            {pass === "password" ? (
+              <i
+                style={{ position: "absolute", top: "28%", right: "1%" }}
+                className="fa-regular fa-eye-slash"
+                id="togglePassword"
+                onClick={handlePass}
+              ></i>
+            ) : (
+              <i
+                style={{ position: "absolute", top: "28%", right: "1%" }}
+                className="fa-regular fa-eye"
+                id="togglePassword"
+                onClick={handlePass}
+              ></i>
+            )}
           </p>
         </div>
         <button type="submit" className="btn btn-primary" onClick={handleclick}>

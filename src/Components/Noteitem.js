@@ -24,11 +24,16 @@ const Noteitem = (props) => {
             <h5 className="card-title">{note.title}</h5>
             <i
               className="fa-solid fa-pen-to-square mx-2"
+              style={{ marginBottom: "7px" }}
               onClick={() => {
                 updateNote(note);
               }}
             ></i>
-            <i className="fa-solid fa-trash mx-2 " onClick={handleclick}></i>
+            <i
+              className="fa-solid fa-trash mx-2 "
+              style={{ marginBottom: "7px" }}
+              onClick={handleclick}
+            ></i>
           </div>
           <p className="card-text">{note.description}</p>
         </div>
